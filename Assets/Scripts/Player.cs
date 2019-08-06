@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     public static bool triggeringWithAI; // detecting if we are colliding with AI
     public static GameObject triggeringAI; //reference to  the AI
 
+    public static bool triggeringWithTree;
+    public GameObject treeObject;
+
     //Functions
     void Start(){
     	health = maxHealth;
@@ -44,6 +47,14 @@ public class Player : MonoBehaviour
 
         if(!triggeringAI)
             triggeringWithAI =false; 
+
+
+         //trigeering with tree (chopping)
+         if(triggeringWithTree && treeObject){
+            if(Input.GetMouseButtonDown(0)){
+                Attack(treeObject);
+            }
+         }   
 
     }
 
@@ -75,10 +86,24 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Constamtly checks whether the player is constantly in the zone of the collider(Tree) or not
+    public void OnTriggerStay(Collider other){
+        if(other.tag == "Tree"){
+            triggeringWithTree = true;
+            treeObject = other.gameObject; //seting gameobject to tree
+
+        }
+    }
+
     public void Attack(GameObject target){
         if(target.tag == "Animal" && weaponEquipped){
             Animal animal = target.GetComponent<Animal>();
             animal.health -= damage;
+        }
+
+        if(target.tag == "Tree" && weaponEquipped){
+            Tree tree = target.GetComponent<Tree>();
+            tree.health -= damage;
         }
 
     }

@@ -56,6 +56,7 @@ public class Slots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     		if(thisItem.type == "Weapon" && player.GetComponent<Player>().weaponEquipped == false){
     			thisItem.equipped = true;
     			item.SetActive(true);
+                player.GetComponent<Player>().weaponEquipped = true;
     		}
     	}
     }
