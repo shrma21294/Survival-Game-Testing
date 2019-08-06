@@ -26,7 +26,7 @@ public class Tree : MonoBehaviour
     	for(int i=0; i<item.Length; i++){
 
     		if(item[i] == null)
-    			print("Item in the tree named "+ this.gameObject.name +"has not been set! Missing ID: "+i);
+    			print("Item in the tree named not set "+ this.gameObject.name +", "+i);
 
     		GameObject spawnItem = Instantiate(item[i], transform.position, Quaternion.identity);
     		Destroy(gameObject);
